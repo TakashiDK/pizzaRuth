@@ -1,0 +1,38 @@
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+.menu-config{
+  background-color: Black;
+}
+
+.text-color {
+  color: white;
+}
+
+.text-color:hover {
+  color: red;
+}
+
+.container-config {
+  width: 100%;
+  margin: 0%;
+  padding: 0%;
+}
+
+.size {
+  width:40%;
+}
+
+.carousel-bg {
+  background-color: #131213;
+}
+.titulo {
+  color: white;
+  text-align: center;
+  font-size: 4rem;
+}
+.bg-perso {
+  background-color: #131213;
+}
+.btn-config{
+  width:100%;
+}
