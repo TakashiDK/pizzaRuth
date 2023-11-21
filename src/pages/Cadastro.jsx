@@ -31,30 +31,29 @@ function Cadastro() {
     e.preventDefault();
 
     const title = "Cadastro";
-    const body = { 'Nome': nome, 'Email': email, 'Senha': senha, 'CEP': cep, 'Logradouro': logradouro, 'NumLogradouro': numLogradouro, 'Bairro': bairro, 'Cidade': cidade, 'UF': uf };
+    const body = { 'Nome': nome, 'Email': email, 'Senha': senha, 'CEP': cep, 'Logradouro': logradouro, 'NumLogradouro': numLogradouro, 'Bairro': bairro, 'Cidade': cidade, 'Estado': UF };
 
     try {
-      const response = await axios.post('http://localhost/pizzaRuth', { body: body, }, { headers: { 'Content=Type': 'application/x-www-form-urlencoded; charset=UTF-8' } });
+      const response = await axios.post('http://localhost/pizzaruth/slim/cadastrarUsuario', { body: body, }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } });
     }
-    cath(error)
-    {
+    catch (error) {
       console.log(error);
     }
   }
 
-  const showCEP = (e) => {
-    e.preventDefautl();
+  const verCEP = (e) => {
+    e.preventDefault();
     pesquisarCEP(cep)
   }
 
   function pesquisarCEP(value) {
-    var cepOk = value.replace(/\D/g, '');
+    var cepPronto = value.replace(/\D/g, '');
 
-    if (cepOk != "") {
-      var validate = /^[0-9]{8}$/;
+    if (cepPronto != "") {
+      var validador = /^[0-9]{8}$/;
 
-      if (validate.test(cepOk)) {
-        fetch('https://viacep.com.br/ws/' + cepOk + '/json/')
+      if (validador.test(cepPronto)) {
+        fetch('https://viacep.com.br/ws/' + cepPronto + '/json/')
           .then((response) => response.json())
           .then((json) => colocarResultado(json));
       }
@@ -76,15 +75,19 @@ function Cadastro() {
     document.getElementById('cidade').value = "";
     setCidade("");
     document.getElementById('estado').value = "naoSelecionado";
-    setBairro(naoSelecionado);
+    setUF(naoSelecionado);
   }
 
   function colocarResultado(resultado) {
     if (!("erro" in resultado)) {
       document.getElementById('endereco').value = resultado.logradouro;
+      setLogradouro(resultado.logradouro);
       document.getElementById('bairro').value = resultado.bairro;
-      document.getElementById('cidade').value = resultado.cidade;
+      setBairro(resultado.bairro);
+      document.getElementById('cidade').value = resultado.localidade;
+      setCidade(resultado.localidade);
       document.getElementById('estado').value = resultado.uf;
+      setUF(resultado.uf);
     }
     else {
       limparFormulario();
@@ -103,13 +106,13 @@ function Cadastro() {
           <Form onSubmit={(e) => cadastrarUsuario(e)}>
             <Row>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3">
                   <Form.Label className='text-color'>Nome Completo</Form.Label>
                   <Form.Control type="text" value={nome} onChange={(e) => setNome(e.target.value)} name="nome" id="nome" placeholder="João da SIlva Sauro" />
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3">
                   <Form.Label className='text-color'>Email</Form.Label>
                   <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" placeholder="Exemplo@mail.com.br" />
                 </Form.Group>
@@ -117,58 +120,50 @@ function Cadastro() {
             </Row>
             <Row>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                   <Form.Label className='text-color'>Senha</Form.Label>
                   <Form.Control type="password" value={senha} onChange={(e) => setSenha(e.target.value)} name="senha" id="senha" placeholder="Insira sua senha" />
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label className='text-color'>Digite Novamente a Senha</Form.Label>
-                  <Form.Control type="password" placeholder="Digite novamente sua senha" />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group className="mb-3" controlId="formBasicCEP">
+                <Form.Group className="mb-3">
                   <Form.Label className='text-color'>CEP</Form.Label>
-                  <Form.Control type="text" value={cep} onChange={(e) => setCEP(e.target.value)} name="cep" id="cep" placeholder="12345-678" />
+                  <Form.Control type="text" value={cep} onChange={(e) => setCep(e.target.value)} name="CEP" id="CEP" onBlur={(e) => verCEP(e)} placeholder="12345-678" />
                 </Form.Group>
               </Col>
+            </Row>
+            <Row>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicAddress">
+                <Form.Group className="mb-3">
                   <Form.Label className='text-color'>Endereço</Form.Label>
-                  <Form.Control type="text" value={logradouro} onChange={(e) => setLogradouro(e.target.value)} name="endereco" id="endereco" placeholder="" readOnly />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group className="mb-3" controlId="formBasicBairro">
-                  <Form.Label className='text-color'>Bairro</Form.Label>
-                  <Form.Control type="text" value={bairro} onChange={(e) => setBairro(e.target.value)} name="bairro" id="bairro" placeholder="" readOnly />
+                  <Form.Control type="text" value={logradouro} onChange={(e) => setLogradouro(e.target.value)} name="endereco" id="endereco" placeholder="" disabled />
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicCity">
-                  <Form.Label className='text-color'>Cidade</Form.Label>
-                  <Form.Control type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} name="cidade" id="cidade" placeholder="" readOnly />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group className="mb-3" controlId="formBasicNumero">
+                <Form.Group className="mb-3">
                   <Form.Label className='text-color'>Número</Form.Label>
                   <Form.Control type="text" value={numLogradouro} onChange={(e) => setNumLogradouro(e.target.value)} name="numLogradouro" id="numLogradouro" placeholder="116" />
                 </Form.Group>
               </Col>
+            </Row>
+            <Row>
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicComplemento">
-                  <Form.Label className='text-color'>UF</Form.Label>
-                  <Form.Select aria-label="Default select example" value={UF} onChange={(e) => setUF(e.target.value)} id="estado" name="estado">
-                    <option value="naoSelecionado" defaultValue disabled>Selecione...</option>
+                <Form.Group className="mb-3">
+                  <Form.Label className='text-color'>Bairro</Form.Label>
+                  <Form.Control type="text" value={bairro} onChange={(e) => setBairro(e.target.value)} name="bairro" id="bairro" placeholder="" disabled />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label className='text-color'>Cidade</Form.Label>
+                  <Form.Control type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} name="cidade" id="cidade" placeholder="" disabled />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label className='text-color'>Estado</Form.Label>
+                  <Form.Select aria-label="Default select example" value={UF} onChange={(e) => setUF(e.target.value)} id="estado" name="estado" disabled>
+                    <option value="naoSelecionado" defaultValue >Selecione...</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -200,9 +195,6 @@ function Cadastro() {
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check className='text-color' type="checkbox" label="Concordo com os termos" />
-            </Form.Group>
             <Button variant="danger" type="submit" value="Cadastrar">
               Cadastrar
             </Button>

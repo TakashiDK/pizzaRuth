@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, React } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,8 +11,42 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
+
 
 function Login() {
+
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const logarUsuario = async (e) => {
+      e.preventDefault();
+
+      const body = {'Email': email, 'Senha': senha}
+      try
+      {
+        const resposta = await axios.post('http://localhost/pizzaRuth/slim/logarUsuario', {body: body}, {headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}});
+        console.log(resposta.data);
+        if (resposta.data)
+        {
+          decidirLogin(resposta.data);
+        }
+      }
+      catch (error)
+      {
+        console.log(error);
+      }
+    }
+
+    function decidirLogin(resposta)
+    {
+      if (resposta == "true")
+      {
+        location.href = 'http://localhost:5173/';
+      }
+    }
+
+
     return (
       <div className='bg-black'>
         <Menu/>
@@ -21,16 +55,16 @@ function Login() {
             <img src="/src/assets/images/android-chrome-512x512.png" alt="" />
           </Col>
           <Col className="col-12 mx-5 size">
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form onSubmit={(e) => logarUsuario(e)}>
+              <Form.Group className="mb-3">
                 <Form.Label className='text-color'>Email</Form.Label>
-                <Form.Control type="email" placeholder="Exemplo@mail.com.br" />
+                <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" type="email" placeholder="Exemplo@mail.com.br" />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Label className='text-color'>Senha</Form.Label>
-                <Form.Control type="password" placeholder="Insira sua senha" />
+                <Form.Control value={senha} onChange={(e) => setSenha(e.target.value)} name="senha" id="senha" type="password" placeholder="Insira sua senha" />
               </Form.Group>
-              <Button variant="danger btn-config" type="submit">
+              <Button variant="danger btn-config" type="submit" value="Entrar">
                 Entrar
               </Button>
             </Form>
