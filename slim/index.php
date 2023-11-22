@@ -88,7 +88,7 @@ function cadastrarUsuario(Request $request, Response $response, array $args)
     $cidade = $formulario['body']['Cidade'];
     $estado = $formulario['body']['Estado'];
     $cep = $formulario['body']['CEP'];
-    $sql = "INSERT INTO tb_cliente (nm_cliente, ds_email, ds_senha, cd_cep, nm_logradouro, nm_bairro, nm_cidade, cd_numero, sg_UF) VALUES ('$nome', '$email', '$senha', '$cep', '$logradouro', '$bairro', '$cidade', '$numLogradouro', '$estado');";
+    $sql = "INSERT INTO tb_usuario (nm_usuario, cd_email_usuario, cd_senha, cd_cep, nm_logradouro, nm_bairro, nm_cidade, cd_num_logradouro, sg_UF) VALUES ('$nome', '$email', '$senha', '$cep', '$logradouro', '$bairro', '$cidade', '$numLogradouro', '$estado');";
     $stmt = getConn()->query($sql);
 }
 
@@ -97,7 +97,7 @@ function logarUsuario(Request $request, Response $response, array $args)
     $formulario = $request->getParsedBody();
     $email = $formulario['body']['Email'];
     $senha = $formulario['body']['Senha'];
-    $sql = "SELECT * FROM tb_cliente WHERE ds_email =:email AND ds_senha =:senha";
+    $sql = "SELECT * FROM tb_usuario WHERE cd_email_usuario =:email AND cd_senha =:senha";
     $stmt = getConn()->prepare($sql);
     $stmt->bindParam("email", $email);
     $stmt->bindParam("senha", $senha);

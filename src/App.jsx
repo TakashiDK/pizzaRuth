@@ -6,6 +6,7 @@ import Pizzas from "./pages/Pizzas";
 import Teste from "./pages/Teste";
 import Posts from "./pages/Posts";
 import NovoPost from "./pages/NovoPost";
+import Atendente from "./pages/Atendente";
 
 function App(){
   return(
@@ -15,9 +16,11 @@ function App(){
         <Route path="/cadastro" element={ <Cadastro/> }/>
         <Route path="/login" element={ <Login/> }/>
         <Route path="/pizzas" element={ <Pizzas/> }/>
+        <Route path="/atendente" element={ <Atendente/> }/>
         <Route path="/Teste" element={ <Teste/> }/>
         <Route path="/Posts" element={ <Posts/> }/>
         <Route path="/NovoPost" element={ <NovoPost/> }/>
+        
       </Routes>
     </BrowserRouter>
     )

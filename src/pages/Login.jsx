@@ -27,10 +27,11 @@ function Login() {
       {
         const resposta = await axios.post('http://localhost/pizzaRuth/slim/logarUsuario', {body: body}, {headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}});
         console.log(resposta.data);
-        if (resposta.data)
-        {
-          decidirLogin(resposta.data);
-        }
+
+          if (resposta.data)
+          {
+            location.href = 'http://localhost:5173/';
+          }
       }
       catch (error)
       {
@@ -38,13 +39,7 @@ function Login() {
       }
     }
 
-    function decidirLogin(resposta)
-    {
-      if (resposta == "true")
-      {
-        location.href = 'http://localhost:5173/';
-      }
-    }
+
 
 
     return (
