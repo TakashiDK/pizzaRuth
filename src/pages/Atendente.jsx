@@ -17,15 +17,15 @@ import axios from "axios";
 function Atendente() {
 return (
     <>
-        <div className='bg-black'>
+        <div className='bg-black tela100'>
             <Menu/>
             <div className="container mt-3 mb-3">
                 <h2 className='text-color'>O que deseja fazer?</h2>
                 <Col className='row flex justify-content-between larg col-12'>
-                <Nav.Link href="/cadastro" className="text-color mt-4 mb-4"><Button variant="danger">Cadastrar Pizza</Button>{' '}</Nav.Link>
-                <Nav.Link href="/cadastro" className="text-color mb-4"><Button variant="danger">Cadastrar Bebida</Button>{' '}</Nav.Link>
+                <Nav.Link href="/atendpizza" className="text-color mt-4 mb-4"><Button variant="danger">Cadastrar Pizza</Button>{' '}</Nav.Link>
+                <Nav.Link href="/atenddrink" className="text-color mb-4"><Button variant="danger">Cadastrar Bebida</Button>{' '}</Nav.Link>
                 <Nav.Link href="/cadastro" className="text-color mb-4"><Button variant="danger">Cadastrar Usuário</Button>{' '}</Nav.Link>
-                <Nav.Link href="/cadastro" className="text-color mb-4"><Button variant="danger">Efetuar Pedido</Button>{' '}</Nav.Link>
+                <Nav.Link href="/" className="text-color mb-4"><Button variant="danger">Efetuar Pedido</Button>{' '}</Nav.Link>
                 </Col>
             </div>
             <Footer/>

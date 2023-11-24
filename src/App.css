@@ -8,6 +8,10 @@
   color: white;
 }
 
+.text-colorw {
+  color: white;
+}
+
 .text-color:hover {
   color: red;
 }
@@ -35,4 +39,9 @@
 }
 .btn-config{
   width:100%;
+}
+
+.tela100 {
+  height: 100vh;
+  width: 100vw;
 }

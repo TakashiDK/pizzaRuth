@@ -26,15 +26,20 @@ function Login() {
       try
       {
         const resposta = await axios.post('http://localhost/pizzaRuth/slim/logarUsuario', {body: body}, {headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}});
-        console.log(resposta.data);
+          console.log(resposta.data);
 
           if (resposta.data)
           {
-            location.href = 'http://localhost:5173/';
+            alert('Logado com sucesso');
+            location.href = 'http://localhost:5173/home';
+          }
+          else{
+            alert('Login falhou com sucesso!');
           }
       }
       catch (error)
       {
+        
         console.log(error);
       }
     }
@@ -52,7 +57,7 @@ function Login() {
           <Col className="col-12 mx-5 size">
             <Form onSubmit={(e) => logarUsuario(e)}>
               <Form.Group className="mb-3">
-                <Form.Label className='text-color'>Email</Form.Label>
+                <Form.Label className='text-colorw'>Email</Form.Label>
                 <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" type="email" placeholder="Exemplo@mail.com.br" />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -62,6 +67,7 @@ function Login() {
               <Button variant="danger btn-config" type="submit" value="Entrar">
                 Entrar
               </Button>
+              <h3 className='text-colorw'>Não possui conta? <a className='text-color' href="/cadastro">Crie uma conta</a></h3>
             </Form>
           </Col>
         </Row>

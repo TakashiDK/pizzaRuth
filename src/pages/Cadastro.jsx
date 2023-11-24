@@ -36,7 +36,7 @@ function Cadastro() {
     try {
       const response = await axios.post('http://localhost/pizzaruth/slim/cadastrarUsuario', { body: body, }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } });
       alert("Cadastro efetuado com sucesso!");
-      location.href = 'http://localhost:5173/';
+      location.href = 'http://localhost:5173/home';
     }
     catch (error) {
       console.log(error);
