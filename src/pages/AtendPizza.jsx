@@ -17,11 +17,27 @@ import axios from "axios";
 function AtendPizza() {
     const [image, setImage] = useState('');
 
-    const uploadImage = async e => {
-        e.preventDefault();
-        console.log("Upload Imagem");
-        console.log(image);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
+
+    const addPizza = async e => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', image);
+
+        try {
+            const response = await axios.post( 'http://localhost:5173', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            alert('Cadastrado');
+        } catch(error){
+            console.error('Erro ao enviar imagem: ', error);
+        }
+    };
 
 return (
     <>
@@ -29,7 +45,7 @@ return (
             <Menu/>
             <div className="">
             <h2 className='text-colorw text-center'>Cadastre uma Pizza</h2>
-            <Form onSubmit={uploadImage}>
+            <Form onSubmit={addPizza}>
                 <Row>
                     <Col>
                     <Form.Group className="mb-3 col-4">
@@ -50,7 +66,7 @@ return (
                     <Col>
                     <Form.Group className="mb-3 col-4">
                         <Form.Label className='text-colorw'>Imagem</Form.Label>
-                        <Form.Control type="file" onChange={e => setImage(e.target.files[0])} name="imagepizza" id="imagepizza"/>
+                        <Form.Control type="file" onChange={handleFileChange} name="imagepizza" id="imagepizza"/>
                     </Form.Group>
                     </Col>
                 </Row>

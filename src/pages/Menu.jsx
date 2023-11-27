@@ -22,7 +22,7 @@ function Menu() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="row flex justify-content-between larg col-12">
                 <Nav className="col-6">
-              <Nav.Link href="/" className="text-color">Home</Nav.Link>
+              <Nav.Link href="/home" className="text-color">Home</Nav.Link>
               <Nav.Link href="/pizzas" className="text-color">Cardápio</Nav.Link>
               </Nav>
               <Nav className="col-6 justify-content-end">

@@ -39,7 +39,6 @@ function Login() {
       }
       catch (error)
       {
-        
         console.log(error);
       }
     }
@@ -67,7 +66,7 @@ function Login() {
               <Button variant="danger btn-config" type="submit" value="Entrar">
                 Entrar
               </Button>
-              <h3 className='text-colorw'>Não possui conta? <a className='text-color' href="/cadastro">Crie uma conta</a></h3>
+              <p className='text-colorw text-end'>Não possui conta? <a className='text-color' href="/cadastro">Crie uma conta</a></p>
             </Form>
           </Col>
         </Row>
