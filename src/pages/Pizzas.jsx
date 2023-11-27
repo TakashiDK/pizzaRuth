@@ -162,89 +162,216 @@ import Col from 'react-bootstrap/Col';
 
 function Pizzas() {
 
-  const [info, setUser] = useState([]);
-  function pickPizza(){
+  const [pizzas, setPizzas] = useState([]);
+  const [bebidas, setBebidas] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  function pickPizza() {
     fetch('http://localhost/pizzaRuth/slim/pizzas')
-    .then((response) => response.json())
-    .then((json) => setUser(json))
+      .then((response) => response.json())
+      .then((json) => {
+        // Converte os valores do preço para números
+        const pizzasWithNumberPrices = json.map((pizza) => ({
+          ...pizza,
+          price: parseFloat(pizza.price),
+        }));
+
+        setPizzas(pizzasWithNumberPrices);
+      });
   }
 
-  useEffect(()=> {
-    pickPizza();
-  }, [])
-
-
-  const [bebida, setDrink] = useState([]);
-  function pickBebidas(){
+  // Função para buscar bebidas do servidor
+  function pickBebidas() {
     fetch('http://localhost/pizzaRuth/slim/bebidas')
-    .then((response) => response.json())
-    .then((json) => setDrink(json))
+      .then((response) => response.json())
+      .then((json) => setBebidas(json));
   }
 
-  useEffect(()=> {
+  // Efeito para buscar pizzas ao montar o componente
+  useEffect(() => {
+    pickPizza();
+  }, []);
+
+  // Efeito para buscar bebidas ao montar o componente
+  useEffect(() => {
     pickBebidas();
-  }, [])
+  }, []);
+
+  // Função para adicionar um produto ao carrinho
+  function addToCart(product) {
+    // Verifica se o produto já está no carrinho
+    const existingItem = cart.find((item) => item.id === product.id_pizza || item.id === product.id_bebida);
+
+    // Se o produto já estiver no carrinho, aumenta a quantidade
+    if (existingItem) {
+      const updatedCart = cart.map((item) => {
+        if (item.id === existingItem.id) {
+          return {
+            ...item,
+            quantidade: item.quantidade + 1,
+          };
+        }
+        return item;
+      });
+
+      setCart(updatedCart);
+    } else {
+      // Se o produto não estiver no carrinho, adiciona como um novo item
+      const newItem = {
+        id: product.id_pizza || product.id_bebida,
+        nome: product.nm_pizza || product.nm_bebida,
+        preco: product.vl_pizza || product.vl_bebida,
+        img: product.img_pizza || product.img_bebida,
+        quantidade: 1,
+      };
+
+      setCart([...cart, newItem]);
+    }
+  }
+
+  // Função para remover um produto do carrinho
+  function removeFromCart(productId) {
+    const updatedCart = cart.map((item) => {
+      if (item.id === productId) {
+        return {
+          ...item,
+          quantidade: item.quantidade - 1,
+        };
+      }
+      return item;
+    }).filter((item) => item.quantidade > 0);
+
+    setCart(updatedCart);
+  }
+  // Função para calcular o total do carrinho
+  function calcularTotal() {
+    const total = cart.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
+    return total;
+  }
+
+  // Função para efetuar o pedido
+  function placeOrder() {
+    // Verifica se o carrinho está vazio
+    if (cart.length === 0) {
+      alert('Não é possível efetuar um pedido sem itens no carrinho.');
+      return;
+    }
+    alert('Pedido efetuado com sucesso!');
+
+    setCart([]);
+  }
+  //   const [info, setUser] = useState([]);
+
+  // function pickPizza(){
+  //   fetch('http://localhost/pizzaRuth/slim/pizzas')
+  //   .then((response) => response.json())
+  //   .then((json) => setUser(json))
+  // }
+
+  // useEffect(()=> {
+  //   pickPizza();
+  // }, [])
 
 
-    return (
+  // const [bebida, setDrink] = useState([]);
+  // function pickBebidas(){
+  //   fetch('http://localhost/pizzaRuth/slim/bebidas')
+  //   .then((response) => response.json())
+  //   .then((json) => setDrink(json))
+  // }
+
+  // useEffect(()=> {
+  //   pickBebidas();
+  // }, [])
+
+  return (
     <div className='bg-perso'>
-        <Menu/>
-        <Container>
+      <Menu />
+      <Container>
         <div className='bg-perso'>
-                <h2 className='titulo'>Pizzas</h2>
-        <Row className='justify-content-md-between'>
-            {info.map( pizza => 
-            <Col key={pizza.id}  xl={3} md={3} sm={12}>
+          <h2 className='titulo'>Pizzas</h2>
+          <Row className='justify-content-md-between'>
+            {pizzas.map(pizza =>
+              <Col key={pizza.id_pizza} xl={3} md={6} sm={12}>
 
-                    <div className='mx-3 m-3'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={pizza.img_pizza} />
-                            <Card.Body>
-                                <Card.Title>{pizza.nm_pizza}</Card.Title>
-                                <Card.Text>
-                                    R$: {pizza.vl_pizza}
-                                </Card.Text>
-                                <div className="text-center">
-                                <Button variant="danger">Adicionar</Button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                
-            </Col>
+                <div className='mx-3 m-3'>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={pizza.img_pizza} />
+                    <Card.Body>
+                      <Card.Title>{pizza.nm_pizza}</Card.Title>
+                      <Card.Text>
+                        R$: {pizza.vl_pizza}
+                      </Card.Text>
+                      <div className="text-center">
+                        <Button variant="danger" className='mx-1' onClick={() => addToCart(pizza)}>Adicionar</Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div>
+
+              </Col>
             )}
-            </Row>
+          </Row>
         </div>
         <div className='bg-black'>
 
-                <h2 className='titulo'>Bebidas</h2>
-        <Row>
-            {bebida.map((bebida) => 
-            <Col key={bebida.id} md={3} sm={1}>
+          <h2 className='titulo'>Bebidas</h2>
+          <Row>
+            {bebidas.map((bebida) =>
+              <Col key={bebida.id_bebida} xl={3} md={6} sm={12}>
 
-                    <div className='m-3' >
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={bebida.img_bebida} />
-                            <Card.Body>
-                                <Card.Title>{bebida.nm_bebida}</Card.Title>
-                                <Card.Text>
-                                    R$: {bebida.vl_bebida}
-                                </Card.Text>
-                                <div className="text-center">
-                                <Button variant="danger">Adicionar</Button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                
-            </Col>
+                <div className='m-3' >
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={bebida.img_bebida} />
+                    <Card.Body>
+                      <Card.Title>{bebida.nm_bebida}</Card.Title>
+                      <Card.Text>
+                        R$: {bebida.vl_bebida}
+                      </Card.Text>
+                      <div className="text-center">
+                        <Button variant="danger" className='mx-1' onClick={() => addToCart(bebida)}>Adicionar</Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </Col>
             )}
-            </Row>
+          </Row>
+          <h2 className='titulo'>Carrinho</h2>
+          <Row className='justify-content-md-center'>
+            {cart.map((item) =>
+              <Col key={item.id} xl={3} md={6} sm={12}>
+
+                <div className='m-3' >
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={item.img} />
+                    <Card.Body>
+                      <Card.Title>{item.nome}</Card.Title>
+                      <Card.Text>
+                        R$: {item.preco} - Quantidade: {item.quantidade}
+                      </Card.Text>
+                      <div className="text-center">
+                        <Button variant="danger" onClick={() => removeFromCart(item.id)}>Remover</Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </Col>
+
+            )}
+          </Row>
+          <Row>
+            <h3 className='text-colorw m-3'>Total: ${calcularTotal()}</h3>
+          </Row>
+          
+          <Row className='justify-content-md-center'>
+            <Button variant="danger" className='mx-1 bt-eft-pedido' onClick={placeOrder}>Efetuar Pedido</Button>
+          </Row>
         </div>
-        </Container>
-        <Footer/>
-    </div>
-    )
-  }
-  
-  export default Pizzas;
+      </Container >
+      <Footer />
+    </div >
+  )
+}
+
+export default Pizzas;

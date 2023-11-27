@@ -25,7 +25,7 @@ return (
                 <Nav.Link href="/atendpizza" className="text-color mt-4 mb-4"><Button variant="danger">Cadastrar Pizza</Button>{' '}</Nav.Link>
                 <Nav.Link href="/atenddrink" className="text-color mb-4"><Button variant="danger">Cadastrar Bebida</Button>{' '}</Nav.Link>
                 <Nav.Link href="/cadastro" className="text-color mb-4"><Button variant="danger">Cadastrar Usuário</Button>{' '}</Nav.Link>
-                <Nav.Link href="/" className="text-color mb-4"><Button variant="danger">Efetuar Pedido</Button>{' '}</Nav.Link>
+                <Nav.Link href="/pizzas" className="text-color mb-4"><Button variant="danger">Efetuar Pedido</Button>{' '}</Nav.Link>
                 </Col>
             </div>
             <Footer/>

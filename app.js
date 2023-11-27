@@ -3,6 +3,7 @@ var cors = require('cors');
 const app = express();
 const uploadUser = require('.middlewares/uploadImage');
 
+
 app.use(cors());
 
 app.use((req, res, next) => {
