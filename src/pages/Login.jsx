@@ -14,6 +14,7 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 
 
+
 function Login() {
 
     const [email, setEmail] = useState("");
@@ -43,9 +44,6 @@ function Login() {
       }
     }
 
-
-
-
     return (
       <div className='bg-black'>
         <Menu/>
@@ -74,5 +72,5 @@ function Login() {
       </div>
     )
   }
-  
+
   export default Login;

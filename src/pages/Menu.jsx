@@ -27,10 +27,11 @@ function Menu() {
               </Nav>
               <Nav className="col-6 justify-content-end">
               
-              <Nav.Link href="/cadastro" className="text-color">      <Button variant="danger">Cadastro</Button>{' '}</Nav.Link>
-              <Nav.Link href="/login" className="text-color">      <Button variant="danger">Login</Button>{' '}</Nav.Link>
-              <Nav.Link href="/pizzas" className="text-color">      <Button variant="danger"> Carrinho</Button>{' '}</Nav.Link>
-              <Nav.Link href="/atendente" className="text-color">      <Button variant="danger"> Atendente</Button>{' '}</Nav.Link>
+              <Nav.Link href="/cadastro" className="text-color">  <Button variant="danger">Cadastro</Button>{' '}</Nav.Link>
+              <Nav.Link href="/login" className="text-color"><Button variant="danger">Login</Button>{' '}</Nav.Link>
+              <Nav.Link href="/pizzas" className="text-color"><Button variant="danger">Carrinho</Button>{' '}</Nav.Link>
+              <Nav.Link href="/atendente" className="text-color"><Button variant="danger">Atendente</Button>{' '}</Nav.Link>
+              <Nav.Link href="/login" className="text-color"><Button variant="danger">Sair</Button>{' '}</Nav.Link>
               </Nav>
             </Nav>
           </Navbar.Collapse>

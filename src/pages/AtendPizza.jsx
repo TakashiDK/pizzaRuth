@@ -15,42 +15,37 @@ import Col from 'react-bootstrap/Col';
 import axios from "axios";
 
 function AtendPizza() {
-    const [image, setImage] = useState('');
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
-    }
+    const [nomePizza, setNomePizza] = useState("");
+    const [valorPizza, setValorPizza] = useState("");
+    const [pathImgPizza, setPathImgPizza] = useState("");
 
-    const addPizza = async e => {
+    const cadastrarPizza = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('image', image);
 
+        const title = "Cadastro Pizza";
+        const body = { 'NomePizza': nomePizza, 'ValorPizza': valorPizza, 'PathImgPizza': pathImgPizza };
         try {
-            const response = await axios.post( 'http://localhost:5173', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            alert('Cadastrado');
-        } catch(error){
-            console.error('Erro ao enviar imagem: ', error);
+            const response = await axios.post('http://localhost/pizzaruth/slim/cadastrarPizza', {body: body,}, { headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } });
+            alert("Pizza Cadastrada");
+            location.href = 'http://localhost:5173/atendpizza';
         }
-    };
-
+        catch (error){
+            console.log(error);
+        }
+    }
 return (
     <>
         <div className='bg-black tela100'>
             <Menu/>
             <div className="">
             <h2 className='text-colorw text-center'>Cadastre uma Pizza</h2>
-            <Form onSubmit={addPizza}>
+            <Form onSubmit={(e) => cadastrarPizza(e)}>
                 <Row>
                     <Col>
                     <Form.Group className="mb-3 col-4">
                         <Form.Label className='text-colorw'>Nome da Pizza</Form.Label>
-                        <Form.Control type="text" name="nmpizza" id="nmpizza" placeholder="Pizza Inglesa" />
+                        <Form.Control type="text" name="nmpizza" id="nmpizza" placeholder="Pizza Inglesa" value={nomePizza} onChange={(e) => setNomePizza(e.target.value)} />
                     </Form.Group>
                     </Col>
                 </Row>
@@ -58,7 +53,7 @@ return (
                     <Col>
                     <Form.Group className="mb-3 col-4">
                         <Form.Label className='text-colorw'>Valor da Pizza</Form.Label>
-                        <Form.Control type="number" name="vlpizza" id="vlpizza" placeholder="40,00" />
+                        <Form.Control type="number" name="vlpizza" id="vlpizza" placeholder="40,00" value={valorPizza} onChange={(e) => setValorPizza(e.target.value)} />
                     </Form.Group>
                     </Col>
                 </Row>
@@ -66,7 +61,7 @@ return (
                     <Col>
                     <Form.Group className="mb-3 col-4">
                         <Form.Label className='text-colorw'>Imagem</Form.Label>
-                        <Form.Control type="file" onChange={handleFileChange} name="imagepizza" id="imagepizza"/>
+                        <Form.Control type="file" onChange={(e) => setPathImgPizza(e.target.value)}/>
                     </Form.Group>
                     </Col>
                 </Row>
