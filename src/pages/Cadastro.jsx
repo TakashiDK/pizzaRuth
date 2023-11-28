@@ -109,13 +109,13 @@ function Cadastro() {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Nome Completo</Form.Label>
+                  <Form.Label className='text-colorw'>Nome Completo</Form.Label>
                   <Form.Control type="text" value={nome} onChange={(e) => setNome(e.target.value)} name="nome" id="nome" placeholder="João da SIlva Sauro" />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Email</Form.Label>
+                  <Form.Label className='text-colorw'>Email</Form.Label>
                   <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" placeholder="Exemplo@mail.com.br" />
                 </Form.Group>
               </Col>
@@ -123,13 +123,13 @@ function Cadastro() {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Senha</Form.Label>
+                  <Form.Label className='text-colorw'>Senha</Form.Label>
                   <Form.Control type="password" value={senha} onChange={(e) => setSenha(e.target.value)} name="senha" id="senha" placeholder="Insira sua senha" />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>CEP</Form.Label>
+                  <Form.Label className='text-colorw'>CEP</Form.Label>
                   <Form.Control type="text" value={cep} onChange={(e) => setCep(e.target.value)} name="CEP" id="CEP" onBlur={(e) => verCEP(e)} placeholder="12345-678" />
                 </Form.Group>
               </Col>
@@ -137,13 +137,13 @@ function Cadastro() {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Endereço</Form.Label>
+                  <Form.Label className='text-colorw'>Endereço</Form.Label>
                   <Form.Control type="text" value={logradouro} onChange={(e) => setLogradouro(e.target.value)} name="endereco" id="endereco" placeholder="" disabled />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Número</Form.Label>
+                  <Form.Label className='text-colorw'>Número</Form.Label>
                   <Form.Control type="text" value={numLogradouro} onChange={(e) => setNumLogradouro(e.target.value)} name="numLogradouro" id="numLogradouro" placeholder="116" />
                 </Form.Group>
               </Col>
@@ -151,19 +151,19 @@ function Cadastro() {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Bairro</Form.Label>
+                  <Form.Label className='text-colorw'>Bairro</Form.Label>
                   <Form.Control type="text" value={bairro} onChange={(e) => setBairro(e.target.value)} name="bairro" id="bairro" placeholder="" disabled />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Cidade</Form.Label>
+                  <Form.Label className='text-colorw'>Cidade</Form.Label>
                   <Form.Control type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} name="cidade" id="cidade" placeholder="" disabled />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label className='text-color'>Estado</Form.Label>
+                  <Form.Label className='text-colorw'>Estado</Form.Label>
                   <Form.Select aria-label="Default select example" value={UF} onChange={(e) => setUF(e.target.value)} id="estado" name="estado" disabled>
                     <option value="naoSelecionado" defaultValue >Selecione...</option>
                     <option value="AC">Acre</option>

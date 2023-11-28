@@ -20,7 +20,7 @@ return (
         <div className='bg-black tela100'>
             <Menu/>
             <div className="container mt-3 mb-3">
-                <h2 className='text-color'>O que deseja fazer?</h2>
+                <h2 className='text-colorw'>O que deseja fazer?</h2>
                 <Col className='row flex justify-content-between larg col-12'>
                 <Nav.Link href="/atendpizza" className="text-color mt-4 mb-4"><Button variant="danger">Cadastrar Pizza</Button>{' '}</Nav.Link>
                 <Nav.Link href="/atenddrink" className="text-color mb-4"><Button variant="danger">Cadastrar Bebida</Button>{' '}</Nav.Link>

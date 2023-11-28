@@ -29,7 +29,7 @@ function Menu() {
               
               <Nav.Link href="/cadastro" className="text-color">      <Button variant="danger">Cadastro</Button>{' '}</Nav.Link>
               <Nav.Link href="/login" className="text-color">      <Button variant="danger">Login</Button>{' '}</Nav.Link>
-              <Nav.Link href="/carrinho" className="text-color">      <Button variant="danger"> Carrinho</Button>{' '}</Nav.Link>
+              <Nav.Link href="/pizzas" className="text-color">      <Button variant="danger"> Carrinho</Button>{' '}</Nav.Link>
               <Nav.Link href="/atendente" className="text-color">      <Button variant="danger"> Atendente</Button>{' '}</Nav.Link>
               </Nav>
             </Nav>

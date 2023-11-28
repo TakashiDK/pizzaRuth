@@ -49,22 +49,22 @@ function Footer() {
             <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Cardápio</h6>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Pizzas
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Esfihas
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Beirutes
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Bebidas
                 </a>
               </p>
@@ -73,22 +73,22 @@ function Footer() {
             <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Informações</h6>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Sobre Nós
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Trabalhe Conosco
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Ouvidoria
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='#!' className='text-color'>
                   Termos e Condições
                 </a>
               </p>
